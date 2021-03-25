@@ -45,7 +45,7 @@ apt-key adv --yes --keyserver keyserver.ubuntu.com --recv-keys $INSTALL_KEY && \
 echo "deb https://ookla.bintray.com/debian generic main" | tee  /etc/apt/sources.list.d/speedtest.list && \
 apt-get update && \
 apt-get install -y speedtest
-COPY speedtest.config /etc/telegraf/telegraf.d/speedtest.config
+COPY speedtest.conf /etc/telegraf/telegraf.d/speedtest.conf
 
 ##/speedtest
 
