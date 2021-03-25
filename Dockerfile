@@ -33,6 +33,7 @@ RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" && \
 EXPOSE 8125/udp 8092/udp 8094
 
 COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
 RUN apt-get install -y bash
@@ -44,7 +45,8 @@ apt-key adv --yes --keyserver keyserver.ubuntu.com --recv-keys $INSTALL_KEY && \
 echo "deb https://ookla.bintray.com/debian generic main" | tee  /etc/apt/sources.list.d/speedtest.list && \
 apt-get update && \
 apt-get install -y speedtest
-COPY speedtest.config /etc/telegraf/telegraf.d/
+COPY speedtest.config /etc/telegraf/telegraf.d/speedtest.config
+
 ##/speedtest
 
 
