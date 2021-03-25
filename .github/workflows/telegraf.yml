@@ -15,7 +15,7 @@ jobs:
     - uses: satackey/action-docker-layer-caching@v0.0.11
       # Ignore the failure of a step and avoid terminating the job.
       continue-on-error: true
-    
+
     - name: Build full image
       run: |
         docker build . -t telegrafconfig
@@ -24,4 +24,4 @@ jobs:
       uses: VaultVulp/gp-docker-action@1.0.1
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
-        image-name: telegraf # Provide only Docker image name, tag will be automatically set to latest
+        image-name: telegrafconfig # Provide only Docker image name, tag will be automatically set to latest
