@@ -37,11 +37,11 @@ ENTRYPOINT ["/entrypoint.sh"]
 
 ########### CUSTOM TIMMEEY PART ################
 ### SPEEDTEST
-apt-get install -y gnupg1 apt-transport-https dirmngr
-export INSTALL_KEY=379CE192D401AB61
-apt-key --yes adv --keyserver keyserver.ubuntu.com --recv-keys $INSTALL_KEY
-echo "deb https://ookla.bintray.com/debian generic main" | tee  /etc/apt/sources.list.d/speedtest.list
-apt-get update
+RUN apt-get install -y gnupg apt-transport-https dirmngr && \
+export INSTALL_KEY=379CE192D401AB61 && \
+apt-key adv --yes --keyserver keyserver.ubuntu.com --recv-keys $INSTALL_KEY && \
+echo "deb https://ookla.bintray.com/debian generic main" | tee  /etc/apt/sources.list.d/speedtest.list && \
+apt-get update && \
 apt-get install -y speedtest
 ##/speedtest
 
