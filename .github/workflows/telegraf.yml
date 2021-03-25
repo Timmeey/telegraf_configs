@@ -1,0 +1,37 @@
+name: Jekyll site CI
+
+on: push
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Pull non cached images
+      run: |
+        docker pull jekyll/builder:latest
+    - uses: satackey/action-docker-layer-caching@v0.0.11
+      # Ignore the failure of a step and avoid terminating the job.
+      continue-on-error: true
+    - name: Build Jekyll site
+      run: |
+        docker build --target builder .
+    - name: Build full image
+      run: |
+        docker build . -t timmeeyblog
+
+    - name: Build and Publish latest Docker image
+      uses: VaultVulp/gp-docker-action@1.0.1
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
+        image-name: timmeeyblog # Provide only Docker image name, tag will be automatically set to latest
+
+    - name: CapRover Image Deploy
+      uses: stardustventures/caprover-deploy@v2
+      with:
+        server: '${{secrets.CAPROVER_ROOT}}'
+        password: '${{ secrets.CAPROVER_PASSWORD}}'
+        appname: 'timmeey-about-everything'
+        image: docker.pkg.github.com/timmeey/timmeey-about-everything/timmeeyblog:latest
