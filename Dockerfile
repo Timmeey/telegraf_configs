@@ -35,7 +35,6 @@ EXPOSE 8125/udp 8092/udp 8094
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x entrypoint.sh
 RUN rm /etc/telegraf/telegraf.conf
-ENTRYPOINT ["/entrypoint.sh"]
 
 RUN apt-get install -y bash
 ########### CUSTOM TIMMEEY PART ################
@@ -46,7 +45,8 @@ apt-key adv --yes --keyserver keyserver.ubuntu.com --recv-keys $INSTALL_KEY && \
 echo "deb https://ookla.bintray.com/debian generic main" | tee  /etc/apt/sources.list.d/speedtest.list && \
 apt-get update && \
 apt-get install -y speedtest
-COPY speedtest.conf /etc/telegraf/telegraf.conf
+COPY telegraf.conf /etc/telegraf/telegraf.conf
+COPY telegraf.d/    /etc/telegraf/telegraf.d
 
 ##/speedtest
 
@@ -54,4 +54,5 @@ COPY speedtest.conf /etc/telegraf/telegraf.conf
 ###########
 
 
-CMD ["telegraf"]
+CMD ["bash"]
+ENTRYPOINT ["telegraf", "--config", "/etc/telegraf/telegraf.conf","--config-directory","/etc/telegraf/telegraf.d/"]
