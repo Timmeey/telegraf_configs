@@ -32,7 +32,6 @@ RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" && \
 
 EXPOSE 8125/udp 8092/udp 8094
 
-RUN chmod +x entrypoint.sh
 RUN rm /etc/telegraf/telegraf.conf
 
 RUN apt-get install -y bash
