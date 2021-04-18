@@ -31,6 +31,6 @@ jobs:
       with:
         server: '${{secrets.CAPROVER_ROOT}}'
         password: '${{ secrets.CAPROVER_PASSWORD}}'
-        appname: 'timmeeytelegraf'
+        app: 'timmeeytelegraf'
         image: docker.pkg.github.com/timmeey/telegraf_configs/telegrafconfig:latest
         
