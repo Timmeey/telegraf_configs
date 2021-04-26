@@ -38,7 +38,7 @@ RUN apt-get install -y bash
 ########### CUSTOM TIMMEEY PART ################
 ### SPEEDTEST
 RUN apt-get install -y gnupg apt-transport-https dirmngr && \
-curl -s https://install.speedtest.net/app/cli/install.deb.sh | sudo bash && \
+curl -s https://install.speedtest.net/app/cli/install.deb.sh | bash && \
 apt-get install -y speedtest
 COPY telegraf.conf /etc/telegraf/telegraf.conf
 COPY systemstats.d/    /etc/telegraf/systemstats.d
