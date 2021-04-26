@@ -30,7 +30,7 @@ RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" && \
     dpkg -i telegraf_${TELEGRAF_VERSION}-1_${ARCH}.deb && \
     rm -f telegraf_${TELEGRAF_VERSION}-1_${ARCH}.deb*
 
-EXPOSE 8125/udp 8092/udp 8094
+
 
 RUN rm /etc/telegraf/telegraf.conf
 
@@ -42,8 +42,9 @@ curl -s https://install.speedtest.net/app/cli/install.deb.sh | bash && \
 apt-get install -y speedtest
 COPY telegraf.conf /etc/telegraf/telegraf.conf
 COPY systemstats.d/    /etc/telegraf/systemstats.d
+RUN rm -rf /etc/telegraf/telegraf.conf.sample
+RUN rm -rf /etc/telegraf/telegraf.d
 
-##/speedtest
 
 
 ###########
