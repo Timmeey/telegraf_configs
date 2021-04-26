@@ -44,7 +44,7 @@ echo "deb https://ookla.bintray.com/debian generic main" | tee  /etc/apt/sources
 apt-get update && \
 apt-get install -y speedtest
 COPY telegraf.conf /etc/telegraf/telegraf.conf
-COPY telegraf.d/    /etc/telegraf/telegraf.d
+COPY systemstats.d/    /etc/telegraf/systemstats.d
 
 ##/speedtest
 
@@ -53,4 +53,4 @@ COPY telegraf.d/    /etc/telegraf/telegraf.d
 
 
 CMD ["bash"]
-ENTRYPOINT ["telegraf", "--config", "/etc/telegraf/telegraf.conf","--config-directory","/etc/telegraf/telegraf.d/"]
+ENTRYPOINT ["telegraf", "--config", "/etc/telegraf/telegraf.conf","--config-directory","/etc/telegraf/systemstats.d/"]
