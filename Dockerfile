@@ -38,11 +38,8 @@ RUN apt-get install -y bash
 ########### CUSTOM TIMMEEY PART ################
 ### SPEEDTEST
 RUN apt-get install -y gnupg apt-transport-https dirmngr && \
-export INSTALL_KEY=379CE192D401AB61 && \
-apt-key adv --yes --keyserver keyserver.ubuntu.com --recv-keys $INSTALL_KEY && \
-echo "deb https://ookla.bintray.com/debian generic main" | tee  /etc/apt/sources.list.d/speedtest.list && \
-apt-get update && \
-apt-get install -y speedtest
+curl -s https://install.speedtest.net/app/cli/install.deb.sh | sudo bash &&
+apt-get install -y speedtest &&
 COPY telegraf.conf /etc/telegraf/telegraf.conf
 COPY systemstats.d/    /etc/telegraf/systemstats.d
 
