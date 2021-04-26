@@ -33,6 +33,8 @@ RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" && \
 
 
 RUN rm /etc/telegraf/telegraf.conf
+RUN rm -rf /etc/telegraf/telegraf.conf.sample
+RUN rm -rf /etc/telegraf/telegraf.d
 
 RUN apt-get install -y bash
 ########### CUSTOM TIMMEEY PART ################
@@ -42,8 +44,7 @@ curl -s https://install.speedtest.net/app/cli/install.deb.sh | bash && \
 apt-get install -y speedtest
 COPY telegraf.conf /etc/telegraf/telegraf.conf
 COPY systemstats.d/    /etc/telegraf/systemstats.d
-RUN rm -rf /etc/telegraf/telegraf.conf.sample
-RUN rm -rf /etc/telegraf/telegraf.d
+
 
 
 
